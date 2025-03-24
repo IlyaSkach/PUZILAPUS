@@ -44,4 +44,28 @@ document.addEventListener("DOMContentLoaded", () => {
       body.style.overflow = "";
     });
   });
+
+  // Добавляем плавную прокрутку
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
+
+      // Закрываем мобильное меню при клике
+      const burgerMenu = document.querySelector(".burger-menu");
+      const mobileMenu = document.querySelector(".mobile-menu");
+      if (burgerMenu.classList.contains("active")) {
+        burgerMenu.classList.remove("active");
+        mobileMenu.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      // Плавная прокрутка
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  });
 });
